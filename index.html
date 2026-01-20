@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAVEN - Your Neighborhood's Trusted Care</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #000000;
+            --secondary-green: #000000;
+            --white: #FFFFFF;
+            --dark-text: #333333;
+            --light-gray: #F8F9FA;
+            --gold: #000000;
+            --footer-dark: #000000;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--white);
+            color: var(--dark-text);
+            overflow-x: hidden;
+        }
+
+        /* Welcome Screen */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeOutWelcome 1s ease-in-out 2s forwards;
+        }
+
+        #welcome-text {
+            font-size: 4em;
+            font-weight: 700;
+            color: var(--white);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: fadeInWelcome 1s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            #welcome-text {
+                font-size: 2.5em;
+            }
+        }
+
+        .welcome-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: moveRight 20s linear infinite;
+        }
+
+        @keyframes fadeInWelcome {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fadeOutWelcome {
+            from { opacity: 1; }
+            to { opacity: 0; pointer-events: none; }
+        }
+
+        @keyframes moveRight {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100vw); }
+        }
+
+        /* Main Content */
+        #main-content {
+            opacity: 0;
+            animation: fadeInMain 1s ease-in-out 3s forwards;
+        }
+
+        @keyframes fadeInMain {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Header Section */
+        #header {
+            background: #000000;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 4em;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 8px;
+            animation: float 3s ease-in-out infinite;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5em;
+                letter-spacing: 4px;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .tagline {
+            font-size: 1.2em;
+            color: var(--white);
+            opacity: 0.95;
+            font-weight: 500;
+            max-width: 600px;
+        }
+
+        .header-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: moveRightSlowly 30s linear infinite;
+        }
+
+        @keyframes moveRightSlowly {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100vw); }
+        }
+
+        /* Back Arrow */
+        #back-arrow {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--white);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        @media (max-width: 480px) {
+            #back-arrow {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        #back-arrow:hover {
+            transform: scale(1.1);
+            background: #000000;
+        }
+
+        #back-arrow:hover i {
+            color: var(--white);
+        }
+
+        #back-arrow i {
+            color: #000000;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+
+        /* Service Selection Section */
+        #services-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.8em;
+            }
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-icon {
+            font-size: 4em;
+            color: #000000;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .service-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .service-description {
+            font-size: 1.1em;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Booking Forms Section */
+        #booking-sections {
+            display: none;
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .booking-form {
+            display: none;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .booking-form {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .booking-form {
+                padding: 20px;
+            }
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-header i {
+            font-size: 3em;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+
+        .form-title {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .form-subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .form-field {
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: fadeInField 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeInField {
+            to { opacity: 1; }
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            color: #000000;
+            font-size: 1.1em;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .form-textarea {
+            padding-top: 15px;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #000000;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .helper-text {
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        /* Dynamic Kid Fields */
+        .kids-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .kid-entry {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .kid-entry {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .kid-entry .input-wrapper i {
+            color: #000000;
+        }
+
+        .add-child-btn {
+            background: var(--light-gray);
+            color: #000000;
+            border: 2px dashed #000000;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+        }
+
+        .add-child-btn:hover {
+            background: #000000;
+            color: var(--white);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #000000, #333333);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Reviews Section */
+        #reviews-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--light-gray);
+        }
+
+        .reviews-carousel {
+            position: relative;
+            margin-top: 40px;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .review-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .review-avatar {
+            width: 70px;
+            height: 70px;
+            background: #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5em;
+            font-weight: 600;
+            margin: 0 auto 15px;
+        }
+
+        .review-name {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .review-stars {
+            margin-bottom: 15px;
+        }
+
+        .review-stars i {
+            color: #000000;
+            font-size: 1.3em;
+        }
+
+        .review-stars .empty-star {
+            color: #DDD;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .empty-review {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+            border: 3px dashed #000000;
+            border-radius: 20px;
+            color: #000000;
+        }
+
+        .empty-review i {
+            font-size: 3em;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .empty-review h3 {
+            font-size: 1.5em;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .empty-review p {
+            font-size: 1.1em;
+            opacity: 0.8;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            background: #000000;
+            border: none;
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 480px) {
+            .carousel-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 1em;
+            }
+        }
+
+        .carousel-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            background: #333333;
+        }
+
+        .carousel-btn.prev {
+            left: -25px;
+        }
+
+        .carousel-btn.next {
+            right: -25px;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-btn.prev {
+                left: -50px;
+            }
+            .carousel-btn.next {
+                right: -50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-btn.prev {
+                left: -40px;
+            }
+            .carousel-btn.next {
+                right: -40px;
+            }
+        }
+
+        /* Leave Review Form */
+        #leave-review-section {
+            padding: 80px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .review-form-container {
+            background: var(--light-gray);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .review-form-header i {
+            font-size: 2em;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .review-form-header h2 {
+            font-size: 1.8em;
+            color: #000000;
+        }
+
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .star-rating i {
+            font-size: 2.5em;
+            color: #DDD;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .star-rating i:hover,
+        .star-rating i.active {
+            color: #000000;
+            transform: scale(1.2);
+        }
+
+        /* Footer */
+        #footer {
+            background: var(--footer-dark);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-header {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .contact-item i {
+            color: #FFFFFF;
+            font-size: 1.2em;
+        }
+
+        .contact-item a {
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #CCCCCC;
+        }
+
+        .personal-note {
+            color: #BDC3C7;
+            font-style: italic;
+            font-weight: 500;
+            margin-top: 20px;
+            font-size: 1em;
+        }
+
+        /* Success Alert */
+        .success-alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #000000;
+            color: var(--white);
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10001;
+            animation: slideInRight 0.5s ease-out;
+            display: none;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading States */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+    </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcome-screen">
+        <div id="welcome-text">Welcome.</div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <!-- Back Arrow -->
+        <div id="back-arrow" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+
+        <!-- Header Section -->
+        <header id="header">
+            <h1 class="logo">HAVEN</h1>
+            <p class="tagline">Your neighborhood's trusted care for kids and pets</p>
+        </header>
+
+        <!-- Service Selection Section -->
+        <section id="services-section">
+            <h2 class="section-title">Choose Your Service</h2>
+            <div class="services-grid">
+                <div class="service-card" onclick="showBookingForm('dog')">
+                    <i class="fas fa-dog service-icon"></i>
+                    <h3 class="service-title">Dog Walking</h3>
+                    <p class="service-description">Reliable, loving care for your furry family members</p>
+                </div>
+                <div class="service-card" onclick="showBookingForm('baby')">
+                    <i class="fas fa-baby service-icon"></i>
+                    <h3 class="service-title">Babysitting</h3>
+                    <p class="service-description">Trustworthy childcare right in your neighborhood</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Forms Section -->
+        <section id="booking-sections">
+            <!-- Dog Walking Form -->
+            <div id="dog-booking-form" class="booking-form">
+                <div class="form-header">
+                    <i class="fas fa-dog"></i>
+                    <h2 class="form-title">Book Dog Walking</h2>
+                    <p class="form-subtitle">Let's get your pup ready for some exercise!</p>
+                </div>
+                <form id="dog-form" onsubmit="submitDogForm(event)">
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" class="form-input" name="fullName" placeholder="Your full name" required>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" class="form-input" name="phone" placeholder="(555) 123-4567" required>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" class="form-input" name="address" placeholder="123 Main St, City, State" required>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-paw"></i>
+                            <select class="form-select" name="numDogs" required>
+                                <option value="">How many dogs?</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4+">4+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-weight"></i>
+                            <select class="form-select" name="dogSize" required>
+                                <option value="">Dog size</option>
+                                <option value="Small (under 25 lbs)">Small (under 25 lbs)</option>
+                                <option value="Medium (25-50 lbs)">Medium (25-50 lbs)</option>
+                                <option value="Large (50-100 lbs)">Large (50-100 lbs)</option>
+                                <option value="Extra Large (100+ lbs)">Extra Large (100+ lbs)</option>
+                                <option value="Mixed Sizes">Mixed Sizes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-bone"></i>
+                            <input type="text" class="form-input" name="breeds" placeholder="e.g., Golden Retriever, Beagle mix" required>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-dollar-sign"></i>
+                            <input type="text" class="form-input" name="price" placeholder="$10-12 suggested" required>
+                        </div>
+                        <p class="helper-text">Suggested rate: $10-12 per 30-minute walk</p>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-clipboard"></i>
+                            <textarea class="form-textarea" name="notes" placeholder="Any special instructions, behavioral notes, or health concerns..."></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Submit Booking
+                    </button>
+                </form>
+            </div>
+
+            <!-- Babysitting Form -->
+            <div id="baby-booking-form" class="booking-form">
+                <div class="form-header">
+                    <i class="fas fa-baby"></i>
+                    <h2 class="form-title">Book Babysitting</h2>
+                    <p class="form-subtitle">Let's plan some quality care for your little ones!</p>
+                </div>
+                <form id="baby-form" onsubmit="submitBabyForm(event)">
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" class="form-input" name="fullName" placeholder="Your full name" required>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" class="form-input" name="phone" placeholder="(555) 123-4567" required>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" class="form-input" name="address" placeholder="123 Main St, City, State" required>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <p style="margin-bottom: 15px; font-weight: 500;"><i class="fas fa-child" style="color: var(--secondary-green);"></i> Please provide each child's name and age:</p>
+                        <div class="kids-container" id="kids-container">
+                            <div class="kid-entry">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" class="form-input" name="childName[]" placeholder="Child's name" required>
+                                </div>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-birthday-cake"></i>
+                                    <input type="number" class="form-input" name="childAge[]" placeholder="Age" min="0" max="18" required>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="add-child-btn" onclick="addChildField()">
+                            <i class="fas fa-plus"></i>
+                            Add Another Child
+                        </button>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-dollar-sign"></i>
+                            <input type="text" class="form-input" name="price" placeholder="$12-15 suggested" required>
+                        </div>
+                        <p class="helper-text">Suggested rate: $12-15 per hour</p>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-clipboard"></i>
+                            <textarea class="form-textarea" name="notes" placeholder="Any allergies, bedtime routines, favorite activities, or special instructions..."></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Submit Booking
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section id="reviews-section">
+            <h2 class="section-title">What Families Are Saying</h2>
+            <div class="reviews-carousel">
+                <button class="carousel-btn prev" onclick="navigateReviews(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="reviews-grid" id="reviews-grid">
+                    <div class="empty-review">
+                        <i class="fas fa-star"></i>
+                        <h3>Be the first to leave a review!</h3>
+                        <p>Share your experience with Haven</p>
+                    </div>
+                </div>
+                <button class="carousel-btn next" onclick="navigateReviews(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Leave Review Section -->
+        <section id="leave-review-section">
+            <div class="review-form-container">
+                <div class="review-form-header">
+                    <i class="fas fa-pen"></i>
+                    <h2>Leave a Review</h2>
+                </div>
+                <form id="review-form" onsubmit="submitReview(event)">
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" class="form-input" name="reviewerName" placeholder="Your full name" required>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <div class="star-rating" id="star-rating">
+                            <i class="fas fa-star" data-rating="1"></i>
+                            <i class="fas fa-star" data-rating="2"></i>
+                            <i class="fas fa-star" data-rating="3"></i>
+                            <i class="fas fa-star" data-rating="4"></i>
+                            <i class="fas fa-star" data-rating="5"></i>
+                        </div>
+                        <input type="hidden" name="rating" id="rating-input" required>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-wrapper">
+                            <i class="fas fa-comment"></i>
+                            <textarea class="form-textarea" name="reviewText" placeholder="Share your experience with Haven..." required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Submit Review
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <h3 class="footer-header">Get in Touch</h3>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <a href="tel:+19843324900">+1 (984) 332-4900</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:braydevv.business@gmail.com">braydevv.business@gmail.com</a>
+            </div>
+            <p class="personal-note">I recommend to call or text me to get to know me if you want to and schedule things out better. :)</p>
+        </footer>
+    </div>
+
+    <!-- Success Alert -->
+    <div id="success-alert" class="success-alert">
+        <i class="fas fa-check-circle"></i>
+        <span id="alert-message">Success!</span>
+    </div>
+
+    <script>
+        // Discord Webhook URLs
+        const DOG_WEBHOOK = 'https://discord.com/api/webhooks/1463254796755534018/agoESlX03LjoSgb-JYCcYpVmvTuJ6bO7MpA5iZklQFmPaZ7YvjCezfEaqQZHFEvHogFq';
+        const BABY_WEBHOOK = 'https://discord.com/api/webhooks/1463254796755534018/agoESlX03LjoSgb-JYCcYpVmvTuJ6bO7MpA5iZklQFmPaZ7YvjCezfEaqQZHFEvHogFq';
+        const REVIEW_WEBHOOK = 'https://discord.com/api/webhooks/1463254796755534018/agoESlX03LjoSgb-JYCcYpVmvTuJ6bO7MpA5iZklQFmPaZ7YvjCezfEaqQZHFEvHogFq';
+
+        // Reviews storage
+        let reviews = [];
+        let currentReviewPage = 0;
+        const reviewsPerPage = 3;
+        let selectedRating = 0;
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            createWelcomeParticles();
+            createHeaderParticles();
+            initializeStarRating();
+            animateFormFields();
+        });
+
+        // Create welcome screen particles
+        function createWelcomeParticles() {
+            const welcomeScreen = document.getElementById('welcome-screen');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'welcome-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 20) + 's';
+                welcomeScreen.appendChild(particle);
+            }
+        }
+
+        // Create header particles
+        function createHeaderParticles() {
+            const header = document.getElementById('header');
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'header-particle';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 30 + 's';
+                particle.style.animationDuration = (Math.random() * 15 + 25) + 's';
+                header.appendChild(particle);
+            }
+        }
+
+        // Initialize star rating system
+        function initializeStarRating() {
+            const stars = document.querySelectorAll('#star-rating i');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    selectedRating = parseInt(this.getAttribute('data-rating'));
+                    document.getElementById('rating-input').value = selectedRating;
+                    updateStars();
+                });
+
+                star.addEventListener('mouseenter', function() {
+                    const hoverRating = parseInt(this.getAttribute('data-rating'));
+                    highlightStars(hoverRating);
+                });
+
+                star.addEventListener('mouseleave', function() {
+                    updateStars();
+                });
+            });
+        }
+
+        function highlightStars(rating) {
+            const stars = document.querySelectorAll('#star-rating i');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        function updateStars() {
+            highlightStars(selectedRating);
+        }
+
+        // Show booking form
+        function showBookingForm(type) {
+            const servicesSection = document.getElementById('services-section');
+            const bookingSections = document.getElementById('booking-sections');
+            const dogForm = document.getElementById('dog-booking-form');
+            const babyForm = document.getElementById('baby-booking-form');
+            const backArrow = document.getElementById('back-arrow');
+
+            servicesSection.style.display = 'none';
+            bookingSections.style.display = 'block';
+            backArrow.style.display = 'flex';
+
+            if (type === 'dog') {
+                dogForm.style.display = 'block';
+                babyForm.style.display = 'none';
+            } else {
+                dogForm.style.display = 'none';
+                babyForm.style.display = 'block';
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            animateFormFields();
+        }
+
+        // Go back to service selection
+        function goBack() {
+            const servicesSection = document.getElementById('services-section');
+            const bookingSections = document.getElementById('booking-sections');
+            const backArrow = document.getElementById('back-arrow');
+
+            servicesSection.style.display = 'block';
+            bookingSections.style.display = 'none';
+            backArrow.style.display = 'none';
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Animate form fields
+        function animateFormFields() {
+            const fields = document.querySelectorAll('.form-field');
+            fields.forEach((field, index) => {
+                field.style.animationDelay = (index * 0.1) + 's';
+            });
+        }
+
+        // Add child field dynamically
+        function addChildField() {
+            const container = document.getElementById('kids-container');
+            const childEntry = document.createElement('div');
+            childEntry.className = 'kid-entry';
+            childEntry.innerHTML = `
+                <div class="input-wrapper">
+                    <i class="fas fa-user"></i>
+                    <input type="text" class="form-input" name="childName[]" placeholder="Child's name" required>
+                </div>
+                <div class="input-wrapper">
+                    <i class="fas fa-birthday-cake"></i>
+                    <input type="number" class="form-input" name="childAge[]" placeholder="Age" min="0" max="18" required>
+                </div>
+            `;
+            container.appendChild(childEntry);
+        }
+
+        // Submit dog walking form
+        async function submitDogForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const data = {
+                name: formData.get('fullName'),
+                phone: formData.get('phone'),
+                address: formData.get('address'),
+                numDogs: formData.get('numDogs'),
+                dogSize: formData.get('dogSize'),
+                breeds: formData.get('breeds'),
+                price: formData.get('price'),
+                notes: formData.get('notes') || 'None'
+            };
+
+            await sendWebhook(DOG_WEBHOOK, {
+                embeds: [{
+                    title: '🐕 New Dog Walking Booking',
+                    color: 10370669,
+                    fields: [
+                        { name: 'Name', value: data.name, inline: true },
+                        { name: 'Phone', value: data.phone, inline: true },
+                        { name: 'Address', value: data.address },
+                        { name: 'Number of Dogs', value: data.numDogs, inline: true },
+                        { name: 'Dog Size', value: data.dogSize, inline: true },
+                        { name: 'Breed(s)', value: data.breeds },
+                        { name: 'Offered Price', value: data.price, inline: true },
+                        { name: 'Special Notes', value: data.notes }
+                    ],
+                    footer: { text: 'Haven Dog Walking' },
+                    timestamp: new Date().toISOString()
+                }]
+            });
+
+            showSuccessAlert('Dog walking booking submitted successfully!');
+            form.reset();
+        }
+
+        // Submit babysitting form
+        async function submitBabyForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const childNames = formData.getAll('childName[]');
+            const childAges = formData.getAll('childAge[]');
+            
+            let childrenInfo = '';
+            for (let i = 0; i < childNames.length; i++) {
+                childrenInfo += `${childNames[i]} (Age: ${childAges[i]})\n`;
+            }
+
+            const data = {
+                name: formData.get('fullName'),
+                phone: formData.get('phone'),
+                address: formData.get('address'),
+                children: childrenInfo.trim(),
+                price: formData.get('price'),
+                notes: formData.get('notes') || 'None'
+            };
+
+            await sendWebhook(BABY_WEBHOOK, {
+                embeds: [{
+                    title: '👶 New Babysitting Booking',
+                    color: 10370669,
+                    fields: [
+                        { name: 'Name', value: data.name, inline: true },
+                        { name: 'Phone', value: data.phone, inline: true },
+                        { name: 'Address', value: data.address },
+                        { name: 'Children', value: data.children },
+                        { name: 'Offered Price', value: data.price, inline: true },
+                        { name: 'Special Notes', value: data.notes }
+                    ],
+                    footer: { text: 'Haven Babysitting' },
+                    timestamp: new Date().toISOString()
+                }]
+            });
+
+            showSuccessAlert('Babysitting booking submitted successfully!');
+            form.reset();
+            // Reset to single child entry
+            const container = document.getElementById('kids-container');
+            container.innerHTML = `
+                <div class="kid-entry">
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="text" class="form-input" name="childName[]" placeholder="Child's name" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="fas fa-birthday-cake"></i>
+                        <input type="number" class="form-input" name="childAge[]" placeholder="Age" min="0" max="18" required>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Submit review form
+        async function submitReview(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const rating = parseInt(document.getElementById('rating-input').value);
+            if (rating === 0) {
+                alert('Please select a rating');
+                return;
+            }
+
+            const data = {
+                name: formData.get('reviewerName'),
+                rating: rating,
+                review: formData.get('reviewText')
+            };
+
+            // Add to local reviews array
+            reviews.push(data);
+            renderReviews();
+
+            await sendWebhook(REVIEW_WEBHOOK, {
+                embeds: [{
+                    title: '⭐ New Review Submitted',
+                    color: 16766720,
+                    fields: [
+                        { name: 'Name', value: data.name, inline: true },
+                        { name: 'Rating', value: '⭐'.repeat(data.rating), inline: true },
+                        { name: 'Review', value: data.review }
+                    ],
+                    footer: { text: 'Haven Reviews' },
+                    timestamp: new Date().toISOString()
+                }]
+            });
+
+            showSuccessAlert('Review submitted successfully!');
+            form.reset();
+            selectedRating = 0;
+            updateStars();
+        }
+
+        // Send webhook to Discord
+        async function sendWebhook(url, data) {
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    console.error('Webhook failed:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Webhook error:', error);
+            }
+        }
+
+        // Render reviews
+        function renderReviews() {
+            const grid = document.getElementById('reviews-grid');
+            
+            if (reviews.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-review">
+                        <i class="fas fa-star"></i>
+                        <h3>Be the first to leave a review!</h3>
+                        <p>Share your experience with Haven</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const startIndex = currentReviewPage * reviewsPerPage;
+            const endIndex = startIndex + reviewsPerPage;
+            const pageReviews = reviews.slice(startIndex, endIndex);
+
+            grid.innerHTML = pageReviews.map(review => `
+                <div class="review-card">
+                    <div class="review-avatar">${getInitials(review.name)}</div>
+                    <div class="review-name">${review.name}</div>
+                    <div class="review-stars">
+                        ${generateStars(review.rating)}
+                    </div>
+                    <p class="review-text">"${review.review}"</p>
+                </div>
+            `).join('');
+        }
+
+        // Get initials from name
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+        }
+
+        // Generate star HTML
+        function generateStars(rating) {
+            let starsHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    starsHTML += '<i class="fas fa-star"></i>';
+                } else {
+                    starsHTML += '<i class="fas fa-star empty-star"></i>';
+                }
+            }
+            return starsHTML;
+        }
+
+        // Navigate reviews
+        function navigateReviews(direction) {
+            const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+            
+            if (totalPages <= 1) return;
+
+            currentReviewPage += direction;
+            
+            if (currentReviewPage < 0) {
+                currentReviewPage = totalPages - 1;
+            } else if (currentReviewPage >= totalPages) {
+                currentReviewPage = 0;
+            }
+
+            renderReviews();
+        }
+
+        // Show success alert
+        function showSuccessAlert(message) {
+            const alert = document.getElementById('success-alert');
+            const alertMessage = document.getElementById('alert-message');
+            
+            alertMessage.textContent = message;
+            alert.style.display = 'block';
+            
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
